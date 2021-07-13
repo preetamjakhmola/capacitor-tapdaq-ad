@@ -1,10 +1,27 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { CapTapdaqAdPlugin } from './definitions';
+import { CapTapdaqAdPlugin } from './definitions';
+ 
+import { AdOptions, AdLoadInfo } from './shared';
 
 export class CapTapdaqAdWeb extends WebPlugin implements CapTapdaqAdPlugin {
-  async echo(options: { value: string }): Promise<{ value: string }> {
-    console.log('ECHO', options);
-    return options;
+
+  constructor() {
+    super({
+      name: 'CapTapdaqAd',
+      platforms: ['web'],
+    });
   }
+
+  
+  async initialize(): Promise<void> {
+     
+  }
+ 
+  async prepareRewardVideoAd(options: AdOptions): Promise<AdLoadInfo> { 
+    return {
+      adUnitId: options.adId,
+    };
+  }
+ 
 }
